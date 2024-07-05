@@ -105,3 +105,5 @@ module.exports = {
 - update userTag, authorAvatar
 - update functions.js
 - update always.js
+- adding shardEvent
+
