@@ -99,9 +99,9 @@ module.exports = {
 ```
 
 # changelog v0.0.1-a1
-removed debug.ez
-update index.js
-adding userID, userPerms, isBotVerify,authorBanner, authorBannerColor, other thing
-update userTag, authorAvatar
-update functions.js
-update always.js
+- removed debug.ez
+- update index.js
+- adding userID, userPerms, isBotVerify,authorBanner, authorBannerColor, other thing
+- update userTag, authorAvatar
+- update functions.js
+- update always.js
