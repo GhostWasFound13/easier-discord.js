@@ -25,18 +25,8 @@ class Bot {
     //start client
     #start() {
         const client = new Client({
-            intents: [
-                GatewayIntentBits.Guilds,
-                GatewayIntentBits.GuildMessages,
-                GatewayIntentBits.MessageContent,
-                GatewayIntentBits.GuildMembers,
-                GatewayIntentBits.GuildMessageReactions,
-            ],
-            partials: [
-                Partials.Message,
-                Partials.Channel,
-                Partials.Reaction,
-            ],
+            intents: new IntentsBitField(this.opt.intents).toArray(),
+            partials: this.opt.partials.map(p => Partials[p]),
         });
         this.client = client;
         this.client.simpler = this;
