@@ -22,7 +22,7 @@
   },
   "license": "MIT",
   "dependencies": {
-    "aoi.js": "https://github.com/GhostWasFound13/easier-discord.js",
+    "aoi.js": "github:GhostWasFound13/easier-discord.js",
     "debug": "^4.3.4",
     "discord.js": "^13.6.0",
     "meatdb": "^2.1.0",
