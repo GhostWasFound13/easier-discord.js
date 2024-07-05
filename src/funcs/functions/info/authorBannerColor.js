@@ -7,9 +7,6 @@ module.exports = {
       const user = await d.client.users.fetch(d.author.id, { force: true });
       const bannerColor = user.bannerColor ? user.bannerColor.toString() : 'No banner color';
       return bannerColor;
-    } catch (error) {
-      console.error('Error fetching user banner color:', error);
-      return 'Error fetching banner color';
-    }
+    } 
   }
 };
