@@ -17,10 +17,7 @@ module.exports = {
         size: Number(size),
         dynamic: dynamic === 'yes',
         extension: format
-      }) || 'No banner';
-    } catch (error) {
-      console.error('Error fetching user banner:', error);
-      return 'Error fetching banner';
-    }
+      })
+    } 
   }
 };
