@@ -12,7 +12,7 @@ Make sure you have node js v16+ installed.
 
 ## Install
 ```
-npm i easier-discord.js
+npm i bds.js
 ```
 or u can use this command to install the github version
 ```
@@ -24,12 +24,18 @@ after installation complete, u can now setup your main file (index.js, main.js o
 ## Setup
 create main file (index.js) and put this code:
 ```javascript
-const { Bot } = require("easier-discord.js") //require easier-discord.js bot class
+const { Bot } = require("bds.js") //require easier-discord.js bot class
 const bot = new Bot({
-    intents: ["GUILDS", "GUILD_MESSAGES"], //create your bot intents, put this with your needed
+    intents: [
+        "Guilds",
+        "GuildMessages",
+        "MessageContent",
+        "GuildMembers",
+        "GuildMessageReactions"
+    ],//create your bot intents, put this with your needed
     prefix: "!", //set your bot command prefix to !
-//enable auto update when your version is outdated, set to false or leave this part to disable
-})
+   partials: ["Message", "Channel", "Reaction"]
+});
 bot.onMessage() //callback that execute command when there's message send, put this once in your bot
 bot.command({
     name: "ping",
