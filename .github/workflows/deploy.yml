@@ -1,0 +1,38 @@
+name: Build and Deploy Discord Bot
+
+# Trigger the workflow on push to the main branch and on a schedule
+on:
+  push:
+    branches:
+      - test  # Change this to your default branch if different
+  schedule:
+    - cron: '0 0 * * *'  # This runs every day at midnight UTC
+
+jobs:
+  build-and-deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v2
+
+    - name: Set up Node.js
+      uses: actions/setup-node@v2
+      with:
+        node-version: '18'  # Change to your node version
+
+    - name: Install dependencies
+      run: |
+        echo "Installing dependencies"
+        npm install
+
+    # Uncomment if needed
+    # - name: Build project
+    #   run: |
+    #     echo "Building project"
+    #     npm run build --if-present --only=prod
+
+    - name: Start the bot
+      run: |
+        echo "Starting the bot"
+        npm run start --if-present --only=prod
