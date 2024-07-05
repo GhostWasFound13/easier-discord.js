@@ -58,6 +58,11 @@ class Bot {
                 }
             }
         });
+
+        // Shard events
+        this.onShardReady();
+        this.onShardDisconnect();
+        this.onShardReconnecting();
     }
 
     // Events
@@ -95,6 +100,25 @@ class Bot {
     onReactionAdd() {
         this.client.on("messageReactionAdd", async (reaction, user) => {
             await require("./handler/command/reactionAdd.js")(reaction, user, this);
+        });
+    }
+
+    // Shard events
+    onShardReady() {
+        this.client.on('shardReady', async (id) => {
+            await require("./handler/command/shardReady.js")(id, this);
+        });
+    }
+
+    onShardDisconnect() {
+        this.client.on('shardDisconnect', async (event, id) => {
+            await require("./handler/command/shardDisconnect.js")(event, id, this);
+        });
+    }
+
+    onShardReconnecting() {
+        this.client.on('shardReconnecting', async (id) => {
+            await require("./handler/command/shardReconnecting.js")(id, this);
         });
     }
 
