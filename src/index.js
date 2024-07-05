@@ -1,7 +1,7 @@
 const api = require("./handler/api.js");
 const version = require("../package.json").version;
 const { Client, GatewayIntentBits, Partials, ActivityType } = require("discord.js");
-const newMap = require("./cache Handler/cache.js");
+const newMap = require("./cacheHandler/cache.js");
 const Db = require("meatdb");
 const fs = require("fs");
 const path = require("path");
@@ -9,7 +9,6 @@ const path = require("path");
 class Bot {
     constructor(opt) {
         this.opt = opt;
-        this.client = {};
         this.prefix = opt.prefix;
         this.db = new Db({
             path: opt?.database?.path,
@@ -18,25 +17,28 @@ class Bot {
         this.funcParser = require("./funcs/parser");
         this.functions = new newMap();
         this.variable = new newMap();
+        this.status = new newMap();
         this.#start();
-        if (typeof this.prefix !== "string") throw new Error("prefix must be string");
+
+        if (typeof this.prefix !== "string") throw new Error("prefix must be a string");
     }
 
-    //start client
+    // Start client
     #start() {
         const client = new Client({
-            intents: new IntentsBitField(this.opt.intents).toArray(),
-            partials: this.opt.partials.map(p => Partials[p]),
+            intents: this.opt.intents.map(intent => GatewayIntentBits[intent]),
+            partials: this.opt.partials.map(partial => Partials[partial]),
         });
         this.client = client;
         this.client.simpler = this;
-        let dirFolder = path.join(__dirname, "funcs", "functions");
 
-        let folders = fs.readdirSync(dirFolder);
+        // Load functions
+        const dirFolder = path.join(__dirname, "funcs", "functions");
+        const folders = fs.readdirSync(dirFolder);
         folders.forEach(x => {
-            let files = fs.readdirSync(path.join(dirFolder, x)).filter(file => file.endsWith('js'));
+            const files = fs.readdirSync(path.join(dirFolder, x)).filter(file => file.endsWith('js'));
             files.forEach(y => {
-                const file = require(`${path.join(dirFolder, x, y)}`);
+                const file = require(path.join(dirFolder, x, y));
                 this.functions.set("$" + y.replace(".js", "").toLowerCase(), file.code);
             });
         });
@@ -45,21 +47,20 @@ class Bot {
         this.client.on('ready', async () => {
             while (this.status.size > 0) {
                 for (let [k, v] of this.status) {
-                    const session = this.client;
-                    session.user.setPresence({
+                    this.client.user.setPresence({
                         activities: [{
                             name: v.text,
                             type: ActivityType[v.type.toUpperCase()],
                         }],
                         status: v.status,
                     });
-                    await sleep(ms(v.time));
+                    await new Promise(resolve => setTimeout(resolve, v.time));
                 }
             }
         });
     }
 
-    //events
+    // Events
     onBotJoin() {
         this.client.on("guildCreate", async (guild) => {
             await require("./handler/command/botJoin.js")(guild, this);
@@ -97,7 +98,7 @@ class Bot {
         });
     }
 
-    //commands
+    // Commands
     botJoinCommand(opt) {
         this.cmd.botJoin.set(this.cmd.botJoin.size, opt);
     }
@@ -161,11 +162,11 @@ class Bot {
     async login(token) {
         await this.client.login(token);
         this.client.prefix = this.prefix;
-        console.log("Initialized on " + this.client.user.tag + "\nMade with : Simple Discord\nv" + version + "\nJoin official support server: https://discord.gg/DW4CCH236j");
+        console.log(`Initialized on ${this.client.user.tag}\nMade with: Simple Discord\nv${version}\nJoin official support server: https://discord.gg/DW4CCH236j`);
         api(this);
     }
 
-    //Custom Function
+    // Custom Function
     createCustomFunction(opt) {
         if (!opt?.name || !opt?.name?.includes('$') || typeof opt?.code !== 'function') throw new Error('Invalid Name or Code');
         this.functions.set(opt.name.toLowerCase(), opt.code);
@@ -174,8 +175,8 @@ class Bot {
     // Add presence
     addPresence(...options) {
         if (!options) throw new Error('Invalid presence options provided!');
-        options.map(s => {
-            if (ms(s.time) < 12000) throw new Error('Status time must be at least 12 seconds!');
+        options.forEach(s => {
+            if (s.time < 12000) throw new Error('Status time must be at least 12 seconds!');
             this.status.set(s.text, s);
         });
     }
@@ -185,12 +186,13 @@ class CommandHandler {
     constructor(opts) {
         this.bot = opts.client || opts.bot;
     }
-    load(folder) {
-        let bot = this.bot;
-        let consoleText = [];
-        let dirFolder = path.join(process.cwd(), folder);
 
-        let files = fs.readdirSync(dirFolder).filter(file => file.endsWith('js'));
+    load(folder) {
+        const bot = this.bot;
+        const consoleText = [];
+        const dirFolder = path.join(process.cwd(), folder);
+
+        const files = fs.readdirSync(dirFolder).filter(file => file.endsWith('js'));
         files.forEach(x => {
             try {
                 const theFile = require(`${dirFolder}/${x}`);
