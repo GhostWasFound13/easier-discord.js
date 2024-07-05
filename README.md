@@ -1,5 +1,10 @@
-# easier-discord.js get started
-easier-discord.js is package that simplified your discord bot coding without any programming knowledge (but it's recommended to do)
+# bds.js get started
+bds.js is package that simplified your discord bot coding without any programming knowledge (but it's recommended to do)
+fork version of easier-discord.js but this time i will try to revamp this:
+update to djs v14
+adding 600 functions
+revamp Handler Folder
+
 
 **To get started**:
 
@@ -23,7 +28,7 @@ const { Bot } = require("easier-discord.js") //require easier-discord.js bot cla
 const bot = new Bot({
     intents: ["GUILDS", "GUILD_MESSAGES"], //create your bot intents, put this with your needed
     prefix: "!", //set your bot command prefix to !
-    autoUpdateVersion: true //enable auto update when your version is outdated, set to false or leave this part to disable
+//enable auto update when your version is outdated, set to false or leave this part to disable
 })
 bot.onMessage() //callback that execute command when there's message send, put this once in your bot
 bot.command({
@@ -87,4 +92,10 @@ module.exports = {
 }
 ```
 
-Need help? Join our official Discord server [here](https://discord.gg/DW4CCH236j)
+# changelog v0.0.1-a1
+removed debug.ez
+update index.js
+adding userID, userPerms, isBotVerify,authorBanner, authorBannerColor, other thing
+update userTag, authorAvatar
+update functions.js
+update always.js
