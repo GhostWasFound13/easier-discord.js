@@ -1,12 +1,25 @@
-if(parseInt(process.version.replace("v","")) < 16) {
-   console.warn("\x1b[31mWarning!\x1b[0m\n\x1b[33measier-discord.js require node js version 16+ to be work, your current node js version:", process.version, "please update your node js version and try again\x1b[0m")
-   process.exit()
-} else {
-   const client = require("./src/index.js")
-   require("./src/handler/string.js")
-
-module.exports = {
-    Bot: client.Bot,
-    CommandHandler: client.CommandHandler
-   }
-}
+const { Bot } = require("aoi.js") //require easier-discord.js bot class
+const bot = new Bot({
+    intents: [
+        "Guilds",
+        "GuildMessages",
+        "MessageContent",
+        "GuildMembers",
+        "GuildMessageReactions"
+    ],//create your bot intents, put this with your needed
+    prefix: "!", //set your bot command prefix to !
+   partials: ["Message", "Channel", "Reaction"]
+});
+bot.onMessage() //callback that execute command when there's message send, put this once in your bot
+bot.command({
+    name: "ping",
+    code: `
+ $sendMessage[$channelId;$pingMs]
+ `
+})//create your first ping command
+/*
+    Note that $sendmessage first part (channelid) is optional
+    u can pass that part
+    $sendMessage[;$pingMs] will work too
+*/
+bot.login("TOKEN_HERE") //put your bot token here
