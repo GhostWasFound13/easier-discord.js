@@ -8,7 +8,7 @@ const bot = new Bot({
         "GuildMessageReactions"
     ],//create your bot intents, put this with your needed
     prefix: "o", //set your bot command prefix to !
-   partials: ["Message", "Channel", "Reaction"] // partial needed
+   partials: ["Message", "Channel", "Reaction"] // partial are usinh because the new update of bds.js is using discord.js v14
 });
 bot.onMessage() //callback that execute command when there's message send, put this once in your bot
 bot.command({
