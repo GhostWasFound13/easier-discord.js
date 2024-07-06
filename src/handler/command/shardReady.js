@@ -1,5 +1,5 @@
-module.exports = async (id, bot) => {
-  let data = { shardID: id };
+module.exports = async (id, guilds, bot) => {
+  let data = { shardID: id, guilds };
   const cmds = bot.cmd.shardReady.values();
   for (const cmd of cmds) {
     if (cmd?.channel?.includes("$")) {
