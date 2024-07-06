@@ -14,7 +14,7 @@ bot.onMessage() //callback that execute command when there's message send, put t
 bot.command({
     name: "ping",
     code: `
- $sendMessage[$channelId;$pingMs]
+ $sendMessage[$channelId;$pingMs]ms
  `
 })//create your first ping command
 /*
