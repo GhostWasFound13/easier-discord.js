@@ -1,9 +1,4 @@
 module.exports = async (id, guilds, bot) => {
-  if (!bot || !bot.cmd || !bot.cmd.shardReady) {
-    console.error("bot.cmd.shardReady is not defined");
-    return;
-  }
-
   let data = { shardID: id, guilds };
   const cmds = bot.cmd.shardReady.values();
 
