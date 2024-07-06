@@ -184,9 +184,9 @@ class Bot {
     }
 
     async login(token) {
-        await this.client.login(opt.token);
+        await this.client.login(token);
         this.client.prefix = this.prefix;
-        console.log(`Initialized on ${this.client.user.tag}\nMade with: Simple Discord\nv${version}\nJoin official support server: https://discord.gg/DW4CCH236j`);
+        console.log(`Initialized on ${this.client.user.tag}\nMade with: discord.js v14\nv${version}\nJoin official support server: https://discord.gg/DW4CCH236j`);
         api(this);
     }
 
