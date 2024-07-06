@@ -7,7 +7,7 @@ const bot = new Bot({
         "GuildMembers",
         "GuildMessageReactions"
     ],//create your bot intents, put this with your needed
-    prefix: "!", //set your bot command prefix to !
+    prefix: "o", //set your bot command prefix to !
    partials: ["Message", "Channel", "Reaction"] // partial needed
 });
 bot.onMessage() //callback that execute command when there's message send, put this once in your bot
