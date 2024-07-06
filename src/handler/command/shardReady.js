@@ -7,7 +7,7 @@ module.exports = async (id, guilds, bot, cmd) => {
         await require("../function.js")(cmd.channel, "channeleval", bot.db, data, bot.client, bot)
       );
     } else {
-      data.channel = bot.client.channels.cache.get(cmd.channel);
+      data.channel = bot.client.channels.cache.get(id);
     }
     require("../function.js")(cmd.code, "shardReady", bot.db, data, bot.client, bot);
   }
