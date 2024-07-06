@@ -1,5 +1,8 @@
 const newMap = require("../cache Handler/cache.js")
 module.exports = {
+    shardReady: new Map(),
+    shardDisconnect: new Map(),
+    shardReconnecting: new Map(),
     alwaysExecute: new newMap(),
     botJoin: new newMap(),
     botLeave: new newMap(),
