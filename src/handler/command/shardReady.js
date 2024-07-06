@@ -1,5 +1,7 @@
 module.exports = async (id, guilds, bot) => {
-  if (!bot || !bot.cmd || !bot.cmd.shardReady)
+  if (!bot || !bot.cmd || !bot.cmd.shardReady) {
+    return
+  }
   const data = { shardID: id, guilds };
   const cmds = bot.cmd.shardReady.values();
 
