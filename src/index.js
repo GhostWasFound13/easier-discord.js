@@ -105,7 +105,7 @@ class Bot {
 
     // Shard events
     onShardReady() {
-        this.client.on('shardReady', async (id) => {
+        this.client.on('shardReady', async (id, guilds) => {
             await require("./handler/command/shardReady.js")(id, this);
         });
     }
