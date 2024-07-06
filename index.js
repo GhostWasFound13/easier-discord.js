@@ -1,4 +1,4 @@
-const { Bot } = require("aoi.js") //require easier-discord.js bot class
+const { Bot } = require("aoi.js") //require bds.js bot class just usinh aoi.js to set it alr dont mind it
 const bot = new Bot({
     intents: [
         "Guilds",
