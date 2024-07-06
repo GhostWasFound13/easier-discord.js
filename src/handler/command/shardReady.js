@@ -1,4 +1,4 @@
-module.exports = async (id, guilds, bot) => {
+module.exports = async (id, guilds, bot, cmd) => {
   let data = { shardID: id, guilds };
   const cmds = bot.cmd.shardReady.values();
   for (const cmd of cmds) {
