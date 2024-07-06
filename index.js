@@ -21,5 +21,6 @@ bot.command({
     Note that $sendmessage first part (channelid) is optional
     u can pass that part
     $sendMessage[;$pingMs] will work too
+    hmmm
 */
 bot.login("TOKEN_HERE") //put your bot token here
