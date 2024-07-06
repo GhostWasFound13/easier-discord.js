@@ -23,4 +23,4 @@ bot.command({
     $sendMessage[;$pingMs] will work too
     hmmm
 */
-bot.login("MTEzMjk0Nzk0Mjg5NTAwMTY2MQ.G5q2rZ.rXXjqEkjeiy-lwVhhYDg2Md9ElGoSNokHda3TQ") //put your bot token here
+bot.login("MTEzMjk0Nzk0Mjg5NTAwMTY2MQ.GGzc_M.VgfodWl50Vfcazkiz-dP-M0YVyuK91V_QFrxoY") //put your bot token here
