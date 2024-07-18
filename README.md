@@ -1,11 +1,5 @@
-# bds.js get started
-bds.js is package that simplified your discord bot coding without any programming knowledge (but it's recommended to do)
-fork version of easier-discord.js but this time i will try to revamp this:
-update to djs v14
-adding 600 functions
-revamp Handler Folder
-
-
+# under revamp into typescript
+will support node.js and typescript
 **To get started**:
 
 Make sure you have node js v16+ installed.
@@ -96,14 +90,4 @@ module.exports = {
         $sendMessage[pong]
     `
 }
-```
-
-# changelog v0.0.1-a1
-- removed debug.ez
-- update index.js
-- adding userID, userPerms, isBotVerify,authorBanner, authorBannerColor, other thing
-- update userTag, authorAvatar
-- update functions.js
-- update always.js
-- adding shardEvent
-
+``
